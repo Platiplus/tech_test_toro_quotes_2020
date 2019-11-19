@@ -1,0 +1,16 @@
+{
+  "name": "toro_ws",
+  "version": "1.0.0",
+  "description": "A websocket/http server to expose an indirect connection to the quotes webservice for the toro-quotes project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "websockets",
+    "webservice",
+    "streams"
+  ],
+  "author": "Victor Rosa (Platiplus)",
+  "license": "ISC"
+}

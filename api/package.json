@@ -1,0 +1,16 @@
+{
+  "name": "toro_api",
+  "version": "1.0.0",
+  "description": "An API for managing users and accounts for the toro-quotes project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "user",
+    "account"
+  ],
+  "author": "Victor Rosa (Platiplus)",
+  "license": "ISC"
+}

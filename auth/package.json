@@ -1,0 +1,15 @@
+{
+  "name": "toro_auth",
+  "version": "1.0.0",
+  "description": "An Authentication microservice for the toro-quotes project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "authentication",
+    "microservice"
+  ],
+  "author": "Victor Rosa (Platiplus)",
+  "license": "ISC"
+}
