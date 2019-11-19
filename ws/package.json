@@ -12,5 +12,9 @@
     "streams"
   ],
   "author": "Victor Rosa (Platiplus)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.3.0",
+    "websocket": "^1.0.30"
+  }
 }
