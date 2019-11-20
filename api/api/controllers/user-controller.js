@@ -1,10 +1,10 @@
 // DEPENDENCIES
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt-nodejs')
+const axios = require('axios').default
 
 // MODEL IMPORTING
 const User = require('../models/user-model').model
-const Account = require('../models/account-model').model
 const Stock = require('../models/stock-model').model
 
 // CREATE A NEW USER
@@ -22,14 +22,10 @@ const create = async (request, response) => {
         username: username.toLowerCase(),
         password: hash
       })
-      const account = new Account({
-        _id: mongoose.Types.ObjectId(),
-        owner: user._id,
-        balance: 0.0
-      })
 
       const createdUser = await user.save()
-      const createdAccount = await account.save()
+
+      const operation = await axios.post(`${process.env.API_URL}/accounts/${user._id}`)
 
       const data = {
         message: 'User created succesfully!',
@@ -38,7 +34,9 @@ const create = async (request, response) => {
           username: createdUser.username
         },
         createdAccount: {
-          _id: createdAccount._id
+          _id: operation.data.createdAccount._id,
+          owner: operation.data.createdAccount.owner,
+          balance: operation.data.createdAccount.balance
         }
       }
       response.status(201).json(data)
@@ -46,7 +44,12 @@ const create = async (request, response) => {
       response.status(409).json({ error: true, message: 'User Already Exists' })
     }
   } catch (error) {
-    response.status(500).json({ error: true, message: error })
+    const err = {
+      status: error.response.status || 500,
+      message: error.response.data.message || 'Operation not completed'
+    }
+    await User.findByIdAndDelete(createdUser._id)
+    response.status(err.status).json({ message: err.message })
   }
 }
 
@@ -77,10 +80,9 @@ const read = async (request, response) => {
 const update = async (request, response) => {
   try {
     const { stock, action } = request.body
-    const id = mongoose.Types.ObjectId(request.params.id)
+    const id = mongoose.Types.ObjectId(request.params.id) 
 
     const dbUser = await User.findById(id)
-    const dbAccount = await Account.findOne({ owner: id })
 
     if (!dbUser) {
       return response.status(404).json({ error: true, message: 'User not found on database' })
@@ -90,9 +92,6 @@ const update = async (request, response) => {
 
     switch(action){
       case 'BUY':
-        if(dbAccount.balance - stock.value < 0){
-          return response.status(400).json({ error: true, message: 'Insufficient funds'})
-        }
         index = dbUser.stocks.map((userStock) => { return userStock.name; }).indexOf(stock.name);
         if(index === -1){
           let bought = new Stock({
@@ -104,35 +103,38 @@ const update = async (request, response) => {
         } else {
           dbUser.stocks[index]['quantity'] += stock.quantity
         }
-        dbAccount.balance -= stock.value
         break;
       case 'SELL':
         index = dbUser.stocks.map((userStock) => { return userStock.name; }).indexOf(stock.name);
-        if(index === -1){
-          return response.status(404).json({ error: true, message: 'User does not have this stock on the account'})
-        } else {
-          if(dbUser.stocks[index]['quantity'] - stock.quantity < 0){
-            return response.status(400).json({ error: true, message: `User doest not have ${stock.quantity} shares of this stock to sell` })
+          if(index === -1){
+            return response.status(404).json({ error: true, message: 'User does not have this stock on the account'})
           } else {
-            dbUser.stocks[index]['quantity'] -= stock.quantity
-            if(dbUser.stocks[index]['quantity'] == 0){
-              dbUser.stocks.splice(index, 1)
+            if(dbUser.stocks[index]['quantity'] - stock.quantity < 0){
+              return response.status(400).json({ error: true, message: `User doest not have ${stock.quantity} shares of this stock to sell` })
+            } else {
+              dbUser.stocks[index]['quantity'] -= stock.quantity
+              if(dbUser.stocks[index]['quantity'] == 0){
+                dbUser.stocks.splice(index, 1)
+              }
             }
-            dbAccount.balance += stock.value
           }
-        }
         break;
       
       default:
         return response.status(400).json({ error: true, message: 'Action not registered'})
-    }
+      }
+      
+      await axios.patch(`${process.env.API_URL}/accounts/${dbUser._id}`, { action, value: stock.value })
+      
+      await dbUser.save()
 
-    await dbUser.save()
-    await dbAccount.save()
-
-    response.status(200).json({ message: 'Operation successfull' })
+      response.status(200).json({ message: 'Operation successfull' })
   } catch (error) {
-    response.status(500).json({ message: 'Operation not completed' })
+    const err = {
+      status: error.response.status || 500,
+      message: error.response.data.message || 'Operation not completed'
+    }
+    response.status(err.status).json({ message: err.message})
   }
 }
 
