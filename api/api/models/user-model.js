@@ -1,6 +1,6 @@
 // DEPENDENCIES
 const mongoose = require('mongoose')
-const stockSchema = require('./stock-model')
+const stockSchema = require('./stock-model').schema
 
 // DECLARATION OF USER MODEL
 const userSchema = mongoose.Schema(

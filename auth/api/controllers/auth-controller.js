@@ -46,7 +46,7 @@ const signin = async (request, response) => {
       }
     })
   } catch (error) {
-    response.status(500).json({ error })
+    response.status(500).json({ error: true, message: error })
   }
 }
 
