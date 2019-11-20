@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const Database = require('./utils/Database')
 
 // CONTROLLERS
 const authRoutes = require('./api/routes/auth-routes')
@@ -11,6 +12,10 @@ const authRoutes = require('./api/routes/auth-routes')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
+
+// DB CONNECTION
+const db = new Database()
+db.connect()
 
 // ROUTES
 app.use('/auth', authRoutes)
