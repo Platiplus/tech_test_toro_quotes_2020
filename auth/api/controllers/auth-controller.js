@@ -5,7 +5,7 @@ const path = require('path')
 const jwt = require('jsonwebtoken')
 
 // MODEL IMPORTING
-const User = require('../models/user-model')
+const User = require('../models/user-model').model
 
 // KEYS
 const privateKEY = fs.readFileSync(path.join('.', 'api', 'keys', 'private.key'), 'utf8')
@@ -53,7 +53,7 @@ const signin = async (request, response) => {
 // VERIFY
 const verify = async (request, response) => {
   try {
-    const token = request.headers.authorization.split(' ')[1]
+    const token = request.body.token
 
     const options = {
       issuer,

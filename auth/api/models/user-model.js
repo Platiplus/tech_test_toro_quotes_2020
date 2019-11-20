@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const mongoose = require('mongoose')
+const stockSchema = require('./stock-model').schema
 
 // DECLARATION OF USER MODEL
 const userSchema = mongoose.Schema(
@@ -11,14 +12,11 @@ const userSchema = mongoose.Schema(
     password: {
       type: String, required: true
     },
-    balance: {
-      type: Number, required: true
-    },
     stocks: {
-      type: Array
+      type: [stockSchema]
     }
   }
 )
 
 // EXPORTING OF MODEL
-module.exports = mongoose.model('User', userSchema, 'users')
+module.exports = { model: mongoose.model('User', userSchema, 'users'), schema: userSchema }
