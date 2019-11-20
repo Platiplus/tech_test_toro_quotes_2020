@@ -70,12 +70,14 @@ const update = async (request, response) => {
   
     switch(action){
       case 'BUY':
+      case 'WITHDRAWAL':
         if(dbAccount.balance - value < 0){
           return response.status(400).json({ error: true, message: 'Insufficient funds'})
         }
         dbAccount.balance -= value
         break;
       case 'SELL':
+      case 'DEPOSIT':
         dbAccount.balance += value
         break;
       
