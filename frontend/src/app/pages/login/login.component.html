@@ -1,0 +1,25 @@
+<div *ngIf="error">{{error.message}}</div>
+<h2>Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && field.username.errors }" />
+        <div *ngIf="submitted && field.username.errors">
+            <div *ngIf="field.username.errors.required">Username is required</div>
+        </div>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && field.password.errors }" />
+        <div *ngIf="submitted && field.password.errors">
+            <div *ngIf="field.password.errors.required">Password is required</div>
+        </div>
+    </div>
+    <div>
+        <button [disabled]="loading">
+            Login
+        </button>
+        <p *ngIf="loading">LOADING</p>
+        <a>Register</a>
+    </div>
+</form>
