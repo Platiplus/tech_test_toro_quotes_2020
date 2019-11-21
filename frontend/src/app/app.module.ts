@@ -6,6 +6,7 @@ import { LoginModule } from './pages/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { RegisterModule } from './pages/register/register.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    LoginModule,  
+    LoginModule,
+    RegisterModule,  
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

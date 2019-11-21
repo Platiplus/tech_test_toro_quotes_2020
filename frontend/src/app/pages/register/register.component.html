@@ -1,9 +1,8 @@
 <img src="../../../assets/toro.svg" alt="logo toro" class="logo">
 <div class="container">
     <div class="box">
-        <!-- <div *ngIf="error">{{error.message}}</div> -->
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <h2>Entre agora</h2>
+                <h2>Crie sua conta</h2>
                 <h4>Comece a investir nos seus sonhos</h4>
             <div>
                 <input placeholder="Username" class="formField" type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && field.username.errors }" />
@@ -11,11 +10,16 @@
             <div>
                 <input placeholder="Password" class="formField" type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && field.password.errors }" />
             </div>
+            <label class="check_container">
+                <h5>Eu concordo com os termos de uso e condições</h5>
+                <input type="checkbox" formControlName="terms" [checked]="acceptTerms" (change)="acceptTerms = !acceptTerms"/>
+                <span class="checkmark"></span>
+            </label>
             <div>
                 <button>
-                    ENTRAR
+                    QUERO CRIAR MINHA CONTA!
                 </button>
-                <h5>Ainda não tem uma conta? <a routerLink="/auth/register">Criar Conta</a></h5>
+                <h5>Já tem uma conta? <a routerLink="/auth/login">Faça login</a></h5>
             </div>
         </form>
     </div>

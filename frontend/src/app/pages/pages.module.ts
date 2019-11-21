@@ -4,6 +4,7 @@ import { ExploreModule } from './explore/explore.module';
 import { ProfileModule } from './profile/profile.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { LoginModule } from './login/login.module';
+import { RegisterModule } from './register/register.module';
 import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     ProfileModule,
     NotFoundModule,
     LoginModule,
+    RegisterModule,
     PagesRoutingModule,
   ],
   declarations: [

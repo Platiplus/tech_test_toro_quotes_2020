@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6 {
   font-stretch: normal;
   font-style: normal;
   font-weight: normal;
-  line-height: 1.43;
+  line-height: 1.1;
   letter-spacing: normal;
   color: #fcfcfc;
 }
@@ -52,6 +52,69 @@ h5 {
   height: 100vh;
   padding: 0;
   width: 100%;
+
+  .check_container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 14px;
+    width: 14px;
+    background-color: #eee;
+  }
+  
+  .check_container {
+    &:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+  
+    input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .check_container {
+    input:checked ~ .checkmark:after {
+      display: block;
+    }
+  
+    .checkmark:after {
+      left: 5px;
+      top: 1px;
+      width: 3px;
+      height: 7px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
   
   .formField {
     color: #929fa5;
