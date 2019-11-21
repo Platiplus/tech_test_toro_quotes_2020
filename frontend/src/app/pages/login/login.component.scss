@@ -132,3 +132,18 @@ h5 {
     }
   }
 }
+
+@media screen and (max-width: 820px) {
+
+  .container{
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  }
+  .container .box {
+      width: 100%;
+  }
+
+  .container .box:last-of-type{
+      display: none;
+  }
+}
