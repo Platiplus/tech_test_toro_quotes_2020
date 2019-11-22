@@ -126,7 +126,11 @@ const update = async (request, response) => {
         return response.status(400).json({ error: true, message: 'Action not registered' })
     }
 
-    await axios.patch(`${process.env.API_URL}/accounts/${dbUser._id}`, { action, value: stock.value })
+    const config = {
+      headers: { 'Authorization': request.headers.authorization }
+    };
+    
+    await axios.patch(`${process.env.API_URL}/accounts/${dbUser._id}`, { action, value: stock.value }, config)
 
     await dbUser.save()
 

@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const bodyParser = require('body-parser')
 const Database = require('./utils/Database')
+const { errors } = require('celebrate')
 const express = require('express')
 const helmet = require('helmet')
 const fileSystem = require('fs')
@@ -29,6 +30,9 @@ db.connect()
 // ROUTES
 app.use('/users', userRoutes)
 app.use('/accounts', accountRoutes)
+
+// CELEBRATE ERROR HANDLING
+app.use(errors())
 
 // ERROR 404 HANDLING
 app.use((request, response, next) => {

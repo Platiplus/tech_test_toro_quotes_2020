@@ -46,7 +46,7 @@ const signin = async (request, response) => {
       }
     })
   } catch (error) {
-    response.status(500).json({ error: true, message: error })
+    return response.status(500).json({ error: true, message: error })
   }
 }
 
@@ -54,7 +54,6 @@ const signin = async (request, response) => {
 const verify = async (request, response) => {
   try {
     const token = request.body.token
-
     const options = {
       issuer,
       audience,
@@ -66,7 +65,7 @@ const verify = async (request, response) => {
 
     response.status(200).json({ token: legitToken })
   } catch (error) {
-    response.status(500).json({ error: true, message: 'Could not verify token' })
+    return response.status(500).json({ error: true, message: 'Could not verify token' })
   }
 }
 
