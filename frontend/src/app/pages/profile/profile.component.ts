@@ -49,7 +49,6 @@ export class ProfileComponent implements OnInit {
           this.userInfo.stocks.find((stock) => {
             if(stock.name === quoteObject[0]){
               stock.value = quotation[quoteObject[0]]
-              console.log(stock)
             }
           })
         }

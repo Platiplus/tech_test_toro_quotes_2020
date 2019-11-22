@@ -80,7 +80,6 @@ const read = async (request, response) => {
 
 // UPDATE AN USER
 const update = async (request, response) => {
-  console.log(request.headers)
   try {
     const { stock, action } = request.body
     const id = mongoose.Types.ObjectId(request.params.id)
