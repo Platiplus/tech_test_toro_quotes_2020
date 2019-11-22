@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'plat-navbar',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 
 export class NavbarComponent {
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
+
+  logout(){
+    this.authenticationService.logout();
+  }
 }

@@ -1,0 +1,99 @@
+.plat-modal-content {
+  margin: 30vh auto;
+  max-width: 580px;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  width: 466px;
+  height: 360px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  
+  .plat-modal-header {
+    color: #223254;
+  }
+
+  .plat-modal-body{
+    flex: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    .total {
+      margin-top: 26px;
+    }
+    
+    .movementInput {
+      margin-top: 26px;
+    }
+  }
+
+  .plat-modal-footer {
+
+    .confirmButton {
+      display: block;
+      width: 173px;
+      height: 48px;
+      background: #00add2;
+      padding: 16px;
+      border: none;
+      color: #FFF;
+      border-radius: 4px;
+      margin: 16px auto;
+      
+      &:hover {
+        cursor: pointer;
+      }
+      
+      &:focus {
+        outline:0;
+      }
+    }
+    
+    .cancelButton {
+      color: #00add2;
+      text-decoration: underline;
+      margin-top: 18px;
+      
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+    margin-top:16px;
+  }
+    
+  p {
+    padding: 5px;
+    
+    span {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  h3 {
+    padding-top: 24px;
+    padding-bottom: 4px;
+    font-size: 24px;
+  }
+  
+  h4 {
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 4px;
+    margin-bottom:24px;
+  }
+
+  input {
+    width: 295px;
+    height: 48px;
+    padding-left: 16px;
+    border: solid 1px #929fa5;
+    border-radius: 4px;
+  }
+}

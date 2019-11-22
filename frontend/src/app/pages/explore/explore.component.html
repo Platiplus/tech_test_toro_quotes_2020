@@ -3,7 +3,7 @@
   <div class="wrapper">
     <h1>Bolsa de valores</h1>
     <h4>Confira as ações em alta no mercado</h4>
-    <div class="table-container" role="table" aria-label="Destinations">
+    <div class="table-container" role="table">
         <div class="flex-table header" role="rowgroup">
         <div class="flex-row first" role="columnheader">NOME</div>
         <div class="flex-row" role="columnheader">VALOR ATUAL</div>
@@ -11,33 +11,12 @@
         <div class="flex-row-buttons" role="columnheader"></div>
         <div class="flex-row-buttons" role="columnheader"></div>
       </div>
-      <div class="flex-table row" role="rowgroup">
-        <div class="flex-row first" role="cell">PETR4</div>
-        <div class="flex-row" role="cell">R$ 15.2</div>
-        <div class="flex-row" role="cell">19 Sep, 1p.m.</div>
-        <div class="flex-row-buttons" role="cell"><button class="details-button">Detalhes</button></div>
-        <div class="flex-row-buttons" role="cell"><button class="buy-button">Comprar</button></div>
-      </div>
-      <div class="flex-table row" role="rowgroup">
-        <div class="flex-row first"  role="cell">PETR4</div>
-        <div class="flex-row" role="cell">R$ 15.2</div>
-        <div class="flex-row" role="cell">23 Sep, 1:30p.m.</div>
-        <div class="flex-row-buttons" role="cell"><button class="details-button">Detalhes</button></div>
-        <div class="flex-row-buttons" role="cell"><button class="buy-button">Comprar</button></div>
-      </div>
-      <div class="flex-table row" role="rowgroup">
-        <div class="flex-row first" role="cell">PETR4</div>
-        <div class="flex-row" role="cell">R$ 15.2</div>
-        <div class="flex-row" role="cell">9 Sep, 2p.m.</div>
-        <div class="flex-row-buttons" role="cell"><button class="details-button">Detalhes</button></div>
-        <div class="flex-row-buttons" role="cell"><button class="buy-button">Comprar</button></div>
-      </div>
-      <div class="flex-table row" role="rowgroup">
-        <div class="flex-row first" role="cell">PETR4</div>
-        <div class="flex-row" role="cell">R$ 15.2</div>
-        <div class="flex-row" role="cell">12 Sep, 2p.m.</div>
-        <div class="flex-row-buttons" role="cell"><button class="details-button">Detalhes</button></div>
-        <div class="flex-row-buttons" role="cell"><button class="buy-button">Comprar</button></div>
+      <div *ngFor= "let quote of stockOptions" class="flex-table row" role="rowgroup">
+        <div class="flex-row first" role="cell">{{quote.name}}</div>
+        <div class="flex-row" role="cell">R$ {{quote.value}}</div>
+        <div class="flex-row" role="cell">{{quote.timestamp}}</div>
+        <div class="flex-row-buttons" role="cell"><button (click)="showDetails(quote.name, quote.value, quote.min, quote.max)" class="details-button">Detalhes</button></div>
+        <div class="flex-row-buttons" role="cell"><button (click)="showBuy(quote.name, quote.value, accountInfo.balance, 'BUY')" class="buy-button">Comprar</button></div>
       </div>
       </div>
   </div>

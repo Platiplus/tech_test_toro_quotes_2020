@@ -19,17 +19,23 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        return this.http.post<any>(`${environment.apiURL}/signin`, { username, password })
+        return this.http.post<any>(`${environment.authURL}/signin`, { username, password })
             .pipe(map(user => {
-                localStorage.setItem('token', JSON.stringify(user));
+                let name = user.username.split('');
+                name[0] = name[0].toUpperCase();
+                name = name.join('');
+                localStorage.setItem('token', JSON.stringify(user.token));
+                localStorage.setItem('username', name);
+                localStorage.setItem('_id', user._id);
                 this.tokenSubject.next(user);
                 return user;
             }));
     }
 
     logout() {
-        // remove user from local storage and set current user to null
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('_id');
         this.tokenSubject.next(null);
     }
 }

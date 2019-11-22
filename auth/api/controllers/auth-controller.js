@@ -42,7 +42,7 @@ const signin = async (request, response) => {
         const payload = { userId: dbUser._id }
 
         const token = jwt.sign(payload, privateKEY, options)
-        response.status(201).json(token)
+        response.status(201).json({ username: dbUser.username, _id: dbUser._id, token })
       }
     })
   } catch (error) {

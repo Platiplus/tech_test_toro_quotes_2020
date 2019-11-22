@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthenticationService } from '../../services/authentication.service'
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'plat-register',
@@ -22,13 +21,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-
-    if (this.authenticationService.tokenValue) { 
-          this.router.navigate(['/']);
-      }
-  }
+    private registerService: RegisterService 
+  ) {}
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
@@ -43,17 +37,14 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
       this.submitted = true;
 
-      console.log(this.loginForm.invalid)
-      console.log(this.loginForm.controls)
-      console.log(this.acceptTerms)
-
       if (this.loginForm.invalid) {
           return;
       }
 
+      console.log(this.field.username.value, this.field.password.value)
+
       this.loading = true;
-      this.authenticationService.login(this.field.username.value, this.field.password.value)
-          .pipe(first())
+      this.registerService.register(this.field.username.value, this.field.password.value)
           .subscribe(
               data => {
                   this.router.navigate(['/auth/login']);

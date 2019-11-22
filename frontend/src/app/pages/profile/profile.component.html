@@ -4,17 +4,27 @@
     <div class="box">
         <div class="content">
             <img src="../../../assets/img-avatar.svg" alt="avatar" class="avatar"/>
-            <h1>Olá, Username</h1>
+            <h1>Olá, {{username}}</h1>
             <h5>Seu saldo atual:</h5>
-            <h2>R$ 5.000,00</h2>
-            <a>Sacar dinheiro</a>
-            <button>DEPOSITAR</button>
+            <h2>R$ {{accountInfo.balance | number:'1.1-2'}}</h2>
+            <a (click)="showMovement('WITHDRAWAL', accountInfo.balance)" >Sacar dinheiro</a>
+            <button (click)="showMovement('DEPOSIT', accountInfo.balance)" >DEPOSITAR</button>
         </div>
     </div>
-    <div class="box">
-        <h2>Vimos aqui que você ainda não tem nenhum investimento</h2>
-        <h4>Não perca tempo! Comece a investir agora mesmo.</h4>
-        <img src="../../../assets/img-semacoes.svg" alt="sem açoes" class="no-stocks"/>
-        <button>ENCONTRAR AÇÕES</button>
+    <div *ngIf="userInfo.stocks.length === 0" class="box">
+            <h2>Vimos aqui que você ainda não tem nenhum investimento</h2>
+            <h4>Não perca tempo! Comece a investir agora mesmo.</h4>
+            <img src="../../../assets/img-semacoes.svg" alt="sem açoes" class="no-stocks"/>
+            <button [routerLink]="['/pages/explore']">ENCONTRAR AÇÕES</button>
+    </div>
+    <div *ngIf="userInfo.stocks.length !== 0" class="box">
+        <div class="stockCard" *ngFor="let stock of userInfo.stocks">
+            <h1 class="stockName">{{stock.name}}</h1>
+            <h4 class="stockName">Valor atual:</h4>
+            <h3 class="stockValue">R$ {{stock.value || '--'}}</h3>
+            <h4 class="stockName">Qtd. cotas:</h4>
+            <h4 style="float:left" class="stockValue">{{stock.quantity}}</h4>
+            <button class="sellButton" (click)="showSell(stock.name, stock.value, accountInfo.balance, 'SELL')" [disabled]="stock.value == 0 || !stock.value">Vender</button>
+        </div>
     </div>
 </div>

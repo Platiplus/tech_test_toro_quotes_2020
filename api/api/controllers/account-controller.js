@@ -7,11 +7,11 @@ const Account = require('../models/account-model').model
 
 // CREATE A NEW ACCOUNT
 const create = async (request, response) => {
-  try{
+  try {
     const dbUser = await User.findById(mongoose.Types.ObjectId(request.params.id))
 
     if (!dbUser) {
-      return response.status(404).json({ error: true, message: 'User not found on database'})
+      return response.status(404).json({ error: true, message: 'User not found on database' })
     }
 
     const account = new Account({
@@ -32,7 +32,6 @@ const create = async (request, response) => {
     }
 
     response.status(201).json(data)
-    
   } catch (error) {
     response.status(500).json({ error: true, message: error })
   }
@@ -41,7 +40,7 @@ const create = async (request, response) => {
 // READ AN ACCOUNT
 const read = async (request, response) => {
   try {
-    const dbAccount = await Account.findById(mongoose.Types.ObjectId(request.params.id))
+    const dbAccount = await Account.findOne({ owner: mongoose.Types.ObjectId(request.params.id) })
 
     if (!dbAccount) {
       return response.status(404).json({ error: true, message: 'Account not found on database' })
@@ -63,28 +62,28 @@ const read = async (request, response) => {
 
 // UPDATE DATA ON AN ACCOUNT
 const update = async (request, response) => {
-  try{
+  try {
     const { action, value } = request.body
-    const id = mongoose.Types.ObjectId(request.params.id)  
+    const id = mongoose.Types.ObjectId(request.params.id)
     const dbAccount = await Account.findOne({ owner: id })
-  
-    switch(action){
+
+    switch (action) {
       case 'BUY':
       case 'WITHDRAWAL':
-        if(dbAccount.balance - value < 0){
-          return response.status(400).json({ error: true, message: 'Insufficient funds'})
+        if (dbAccount.balance - value < 0) {
+          return response.status(400).json({ error: true, message: 'Insufficient funds' })
         }
         dbAccount.balance -= value
-        break;
+        break
       case 'SELL':
       case 'DEPOSIT':
         dbAccount.balance += value
-        break;
-      
+        break
+
       default:
-        return response.status(400).json({ error: true, message: 'Action not registered'})
+        return response.status(400).json({ error: true, message: 'Action not registered' })
     }
-  
+
     await dbAccount.save()
     response.status(200).json({ message: 'Operation successfull' })
   } catch (error) {
@@ -95,5 +94,5 @@ const update = async (request, response) => {
 module.exports = {
   create,
   read,
-  update,
+  update
 }

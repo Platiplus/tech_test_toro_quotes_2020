@@ -7,7 +7,7 @@
     <nav class="rightnav">
         <a [routerLink]="['/pages/profile']" class="rightnav">Minhas ações</a>
         <a [routerLink]="['/pages/explore']" class="rightnav">Bolsa de valores</a>
-        <a [routerLink]="['/auth/login']" class="rightnav">Sair</a>
+        <a [routerLink]="['/auth/login']" (click)="logout()" class="rightnav">Sair</a>
     </nav>
 </nav>
 
