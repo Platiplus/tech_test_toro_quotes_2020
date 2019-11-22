@@ -41,8 +41,6 @@ export class RegisterComponent implements OnInit {
           return;
       }
 
-      console.log(this.field.username.value, this.field.password.value)
-
       this.loading = true;
       this.registerService.register(this.field.username.value, this.field.password.value)
           .subscribe(

@@ -1,0 +1,5 @@
+/mongo/*.wt
+/mongo/*.lock
+/mongo/*.bson
+/mongo/WiredTiger
+/mongo/WiredTiger.*

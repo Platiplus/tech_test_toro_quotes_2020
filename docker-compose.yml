@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+  mongo:
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    ports:
+      - "27017:27017"
+    image: mongo
+    networks:
+      - app-network
+    volumes:
+      - ./mongo:/data/db
+    command: --serviceExecutor adaptive
+
+  toro-quotes:
+    image: toroinvestimentos/quotesmock
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    working_dir: /usr/src/app
+    volumes:
+      - ./api:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - PORT=8000
+    links:
+      - mongo
+
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    working_dir: /usr/src/app
+    volumes:
+      - ./auth:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - PORT=8001
+    links:
+      - mongo
+
+  ws:
+    build:
+      context: ./ws
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    working_dir: /usr/src/app
+    volumes:
+      - ./ws:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - PORT=8002
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    working_dir: /usr/src/app
+    volumes:
+      - ./frontend:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - PORT=80
+
+networks:
+  app-network:
+    driver: bridge

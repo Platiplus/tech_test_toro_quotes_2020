@@ -8,8 +8,8 @@ const stockClient = new WebSocketClient()
 // REGISTERED CLIENTS
 const clients = []
 // SERVER LISTENER
-httpServer.listen(1337, function () {
-  console.log((new Date()) + ' Server is listening on port ' + 1337)
+httpServer.listen(8002, function () {
+  console.log((new Date()) + ' Server is listening on port ' + 8002)
 })
 // IO LISTENER
 const stockServer = io(httpServer)
@@ -41,5 +41,5 @@ stockServer.on('connect', (socket) => {
     })
   })
 
-  stockClient.connect('ws://localhost:8080/quotes')
+  stockClient.connect('ws://toro-quotes:8080/quotes')
 })

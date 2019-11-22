@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  authURL: 'http://auth:8001/auth',
-  apiURL: 'http://api:8000',
-  quotesURL: 'http://ws:1337'
+  authURL: 'http://localhost:8001/auth',
+  apiURL: 'http://localhost:8000',
+  quotesURL: 'http://localhost:8002'
 };
 
 /*
