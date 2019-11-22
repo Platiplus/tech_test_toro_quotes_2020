@@ -6,6 +6,17 @@ import { SimpleModalService } from "ngx-simple-modal";
 import { AccountService } from 'src/app/services/account.service';
 import { QuoteService } from 'src/app/services/quote.service';
 
+export interface UserInfo {
+  username: string,
+  _id: string,
+  stocks: Array<Stocks>,
+}
+
+export interface Stocks {
+  name: string,
+  value: number
+}
+
 @Component({
   selector: 'plat-profile',
   templateUrl: './profile.component.html',
@@ -16,10 +27,10 @@ export class ProfileComponent implements OnInit {
   public stockOptions = [];
   public ioConnection: any;
   public username: string = ''
-  public userInfo: object = {
+  public userInfo: UserInfo = {
     username: '',
     _id: '',
-    stocks: [{}]
+    stocks: [{name: '', value: 0}]
   }
   public accountInfo: object = {
     balance: 0
