@@ -4,6 +4,9 @@
 
 Este projeto é um teste para desenvolvedor fullstack para a Toro Investimentos.
 
+# Projeto de telas
+As telas do aplicativo estão demonstradas no arquivo ```toro_quotes-telas.pdf``` que se encontra na pasta raiz do projeto.
+
 ## Iniciando
 O projeto foi feito com NodeJS e Angular.
 
@@ -25,7 +28,7 @@ Informações detalhadas sobre a instalação serão encontradas nos links acima
 ### Rodando o projeto
 
 #### Docker e Docker-compose
-Para instalar o projeto através do docker, vá para a pasta raiz do projeto e rode o comando ```docker-compose up```.
+Para instalar o projeto através do docker, vá para a pasta raiz do projeto e rode o comando ```docker-compose up --build```.
 
 O projeto estará rodando no endereço 'http://localhost'
 
@@ -38,6 +41,9 @@ O projeto estará rodando no endereço 'http://localhost:4200'
 
 #### Testes
 Para rodar os testes, na pasta frontend e na pasta api, basta rodar o comando ```npm test``` em uma aba do terminal.
+
+#### Fluxo simples sugerido
+Registro > Login > Perfil (depósito e saque) > Bolsa de Valores (detalhes e compra) > Perfil (venda de ações) > Sair
 
 ## Desenvolvido com
 
