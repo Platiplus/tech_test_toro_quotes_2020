@@ -4,7 +4,7 @@
   "description": "An API for managing users and accounts for the toro-quotes project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 10000 --exit"
   },
   "keywords": [
     "api",
@@ -24,5 +24,12 @@
     "helmet": "^3.21.2",
     "mongoose": "^5.7.12",
     "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "casual": "^1.6.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dirty-chai": "^2.0.1",
+    "mocha": "^6.2.2"
   }
 }

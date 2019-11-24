@@ -127,9 +127,9 @@ const update = async (request, response) => {
     }
 
     const config = {
-      headers: { 'Authorization': request.headers.authorization }
-    };
-    
+      headers: { Authorization: request.headers.authorization }
+    }
+
     await axios.patch(`${process.env.API_URL}/accounts/${dbUser._id}`, { action, value: stock.value }, config)
 
     await dbUser.save()
