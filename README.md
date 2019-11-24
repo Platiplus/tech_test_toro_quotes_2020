@@ -4,7 +4,7 @@
 
 Este projeto é um teste para desenvolvedor fullstack para a Toro Investimentos.
 
-# Projeto de telas
+## Projeto de telas
 As telas do aplicativo estão demonstradas no arquivo ```toro_quotes-telas.pdf``` que se encontra na pasta raiz do projeto.
 
 ## Iniciando
@@ -33,7 +33,7 @@ Para instalar o projeto através do docker, vá para a pasta raiz do projeto e r
 O projeto estará rodando no endereço 'http://localhost'
 
 #### Localmente
-Caso desejar instalar o projeto localmente sem a utilização de containers, entre em cada pasta do projeto (api, auth, frontend e ws) e rode o comando ````npm install```.
+Caso desejar instalar o projeto localmente sem a utilização de containers, entre em cada pasta do projeto (api, auth, frontend e ws) e rode o comando ```npm install```.
 Rodar o comando ```node server.js``` nas pastas ws, auth e api em abas separadas do seu terminal.
 Rodar o comando ```ng serve``` na pasta frontend.
 
