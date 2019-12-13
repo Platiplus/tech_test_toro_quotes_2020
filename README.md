@@ -10,7 +10,7 @@ As telas do aplicativo estão demonstradas no arquivo ```toro_quotes-telas.pdf``
 ## Iniciando
 O projeto foi feito com NodeJS e Angular.
 
-Para ter uma cópia local do código fonte, você poderá rodar o comando ```git clone https://github.com/Platiplus/dti-tic-tac-toe.git``` em um terminal
+Para ter uma cópia local do código fonte, você poderá rodar o comando ```git clone https://github.com/Platiplus/toro-quotes.git``` em um terminal
 ou baixar a zip do projeto no botão que fica no canto superior direito da tela.
 
 ### Pré-requisitos
